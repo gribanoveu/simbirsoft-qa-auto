@@ -1,6 +1,6 @@
 package com.github.gribanoveu.simbirsoftqa.tests;
 
-import com.github.gribanoveu.simbirsoftqa.base.Driver;
+import com.github.gribanoveu.simbirsoftqa.driver.Driver;
 import com.github.gribanoveu.simbirsoftqa.enums.Browsers;
 import com.github.gribanoveu.simbirsoftqa.helpers.Wait;
 import com.github.gribanoveu.simbirsoftqa.service.AllureAttachments;
@@ -27,7 +27,7 @@ public abstract class BaseTest {
      * Получает указание запускать ли удаленный веб драйвер */
     @BeforeSuite(description = "Запустить браузер")
     public static void runBrowser() {
-        Driver.getDriver(Browsers.fromString(BROWSER), Boolean.valueOf(IS_REMOTE_DRIVER));
+        Driver.getDriver(Browsers.fromString(BROWSER), Boolean.parseBoolean(IS_REMOTE_DRIVER));
         Driver.getInstance().manage().window().maximize();
         Wait.initWait(DURATION_TIMEOUT, DURATION_SLEEP);
         AllureAttachments.getAllureEnvironment();

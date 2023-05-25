@@ -1,6 +1,6 @@
 package com.github.gribanoveu.simbirsoftqa.elements;
 
-import com.github.gribanoveu.simbirsoftqa.base.Driver;
+import com.github.gribanoveu.simbirsoftqa.driver.Driver;
 import com.github.gribanoveu.simbirsoftqa.helpers.Wait;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.By;

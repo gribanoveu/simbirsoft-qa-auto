@@ -1,6 +1,6 @@
 package com.github.gribanoveu.simbirsoftqa.helpers;
 
-import com.github.gribanoveu.simbirsoftqa.base.Driver;
+import com.github.gribanoveu.simbirsoftqa.driver.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;

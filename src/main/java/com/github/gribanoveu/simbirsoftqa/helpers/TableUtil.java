@@ -1,6 +1,6 @@
 package com.github.gribanoveu.simbirsoftqa.helpers;
 
-import com.github.gribanoveu.simbirsoftqa.base.Driver;
+import com.github.gribanoveu.simbirsoftqa.driver.Driver;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;

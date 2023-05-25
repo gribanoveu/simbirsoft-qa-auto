@@ -232,12 +232,6 @@
                 <browser>edge</browser>
             </properties>
         </profile>
-        <profile>
-            <id>[!] Run Firefox</id>
-            <properties>
-                <browser>firefox</browser>
-            </properties>
-        </profile>
     </profiles>
     
 </project>

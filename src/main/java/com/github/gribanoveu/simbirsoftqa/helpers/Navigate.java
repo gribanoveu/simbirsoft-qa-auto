@@ -1,6 +1,6 @@
 package com.github.gribanoveu.simbirsoftqa.helpers;
 
-import com.github.gribanoveu.simbirsoftqa.base.Driver;
+import com.github.gribanoveu.simbirsoftqa.driver.Driver;
 import io.qameta.allure.Allure;
 
 /**

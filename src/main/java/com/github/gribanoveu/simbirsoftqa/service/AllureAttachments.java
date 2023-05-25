@@ -1,6 +1,6 @@
 package com.github.gribanoveu.simbirsoftqa.service;
 
-import com.github.gribanoveu.simbirsoftqa.base.Driver;
+import com.github.gribanoveu.simbirsoftqa.driver.Driver;
 import com.google.common.collect.ImmutableMap;
 import io.qameta.allure.Attachment;
 import lombok.extern.slf4j.Slf4j;
