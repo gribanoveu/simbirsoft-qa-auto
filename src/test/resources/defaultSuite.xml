@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="XYZ Bank Tests">
+    <listeners>
+        <listener class-name="com.github.gribanoveu.simbirsoftqa.service.TestErrorListener"/>
+    </listeners>
+
+    <test name="Login">
+        <classes>
+            <class name="com.github.gribanoveu.simbirsoftqa.tests.XyzBankTransactionsSmokeTest" />
+        </classes>
+    </test>
+</suite>

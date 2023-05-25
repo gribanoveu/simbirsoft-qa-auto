@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.github.gribanoveu</groupId>
+    <artifactId>simbirsoft-qa</artifactId>
+    <version>0.0.1</version>
+
+    <properties>
+        <!-- PROJECT -->
+        <java.version>17</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- MAVEN -->
+        <maven-compiler-plugin>3.10.1</maven-compiler-plugin>
+        <maven-surefire-plugin>3.0.0-M8</maven-surefire-plugin>
+        <remote>false</remote>
+        <browser>chrome</browser>
+
+        <!-- DEPENDENCIES -->
+        <!-- selenium -->
+        <selenium.version>4.8.1</selenium.version>
+        <webdrivermanager.version>5.3.2</webdrivermanager.version>
+
+        <!-- asserts -->
+        <assertj.version>3.24.2</assertj.version>
+
+        <!-- tests -->
+        <testng.version>7.7.1</testng.version>
+        <defaultSuite>src/test/resources/defaultSuite.xml</defaultSuite>
+
+        <!-- logging -->
+        <logback.version>1.4.6</logback.version>
+
+        <!-- report -->
+        <aspectj.version>1.9.9.1</aspectj.version>
+        <allure.version>2.21.0</allure.version>
+        <allure-maven-plugin.version>2.11.2</allure-maven-plugin.version>
+
+        <!-- other -->
+        <lombok.version>1.18.26</lombok.version>
+
+        <!-- transitive -->
+        <google-guava.version>31.1-jre</google-guava.version>
+        <slf4j-api.version>2.0.4</slf4j-api.version>
+    </properties>
+
+    <dependencyManagement>
+        <!-- используется для контроля версий у транзитивных зависимостей в подключенных библиотеках
+        нужно, чтобы подгружать меньше библиотек в локальный репозиторий мавена -->
+        <dependencies>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${google-guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>${selenium.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <dependencies>
+        <dependency>
+            <!-- плагин для общения с браузером -->
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-ie-driver</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-htmlunit-driver</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-safari-driver</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-devtools-v85</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <!-- плагин для автоматической загрузки нужной версии вебдрайвера
+            используется более старая версия для уменьшения количества зависимостей
+            в случае, если нужны новые фичи менеджера, можно обновить-->
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${webdrivermanager.version}</version>
+        </dependency>
+        <dependency>
+            <!-- плагин для запуска тестов  -->
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <!-- плагин для использования ассертов  -->
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+        </dependency>
+        <dependency>
+            <!-- плагин для логирования  -->
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <!-- плагин для использования аннотаций  -->
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        <dependency>
+            <!-- плагин для отчетов allure  -->
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
+        <dependency>
+            <!-- плагин для прикрепления аттачментов в отчет allure  -->
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-attachments</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <!-- плагин для сборки проекта -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <!-- плагин для генерации отчетов -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin}</version>
+                <configuration>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${defaultSuite}</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <systemPropertyVariables>
+                        <!-- подтягивает переменные окружения по имени в теге (stand, user) -->
+                        <isRemote>${remote}</isRemote>
+                        <browser>${browser}</browser>
+                    </systemPropertyVariables>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <!-- плагин для сборки отчета allure -->
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure-maven-plugin.version}</version>
+                <configuration>
+                    <propertiesFilePath>src/main/resources/allure.properties</propertiesFilePath>
+                    <reportVersion>${allure.version}</reportVersion>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <excludeDefaults>true</excludeDefaults>
+        <plugins>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure-maven-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </reporting>
+
+    <profiles>
+        <profile>
+            <!-- Флаг для запуска на удаленной машине -->
+            <id>[ ] Run Remote</id>
+            <properties>
+                <remote>true</remote>
+            </properties>
+        </profile>
+        <profile>
+            <id>[!] Run Chrome</id>
+            <properties>
+                <browser>chrome</browser>
+            </properties>
+        </profile>
+        <profile>
+            <id>[!] Run Edge</id>
+            <properties>
+                <browser>edge</browser>
+            </properties>
+        </profile>
+        <profile>
+            <id>[!] Run Firefox</id>
+            <properties>
+                <browser>firefox</browser>
+            </properties>
+        </profile>
+    </profiles>
+    
+</project>
