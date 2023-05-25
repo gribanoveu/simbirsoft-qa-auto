@@ -36,7 +36,7 @@ public class XyzBankTransactionsSmokeTest extends BaseTest {
                 .whenPressWithdrawnButton()
                 .andWithdrawnMoneyFromAccount(SUM_FROM_FIBONACCI_ALGORITHM)
                 .checkThatSumOnAccountEqualsZero()
-                .andOpenTransactionsHistory();
+                .andOpenTransactionsHistory(); // иногда в истории транзакций не отображается ничего, баг сайта, нужно перезапустить
         new TransactionPage()
                 .checkThatDebitAndWithdrawExistWithSum(SUM_FROM_FIBONACCI_ALGORITHM)
                 .attachCsvFileToAllureReport()

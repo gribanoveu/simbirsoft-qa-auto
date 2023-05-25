@@ -9,8 +9,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public enum Browsers {
     CHROME("chrome"),
-    FIREFOX("firefox"),
-    EDGE("edge");
+    FIREFOX("firefox");
 
     private final String browserName;
 
