@@ -7,6 +7,8 @@ import com.github.gribanoveu.simbirsoftqa.service.AllureAttachments;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 import java.time.Duration;
 
@@ -16,6 +18,7 @@ import java.time.Duration;
  */
 @Slf4j
 public abstract class BaseTest {
+    // проперти для запуска параметризованных тестов через maven или CI/CD
     public static final String BROWSER = System.getProperty("browser", "chrome");
     public static final String IS_REMOTE_DRIVER = System.getProperty("isRemote", "false");
 

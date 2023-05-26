@@ -30,6 +30,7 @@
 
         <!-- tests -->
         <testng.version>7.7.1</testng.version>
+        <!-- дефолтный сьют, запускается при mvn clean test -->
         <defaultSuite>src/test/resources/defaultSuite.xml</defaultSuite>
 
         <!-- logging -->
@@ -97,9 +98,7 @@
             </exclusions>
         </dependency>
         <dependency>
-            <!-- плагин для автоматической загрузки нужной версии вебдрайвера
-            используется более старая версия для уменьшения количества зависимостей
-            в случае, если нужны новые фичи менеджера, можно обновить-->
+            <!-- плагин для автоматической загрузки нужной версии вебдрайвера -->
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>${webdrivermanager.version}</version>
@@ -174,7 +173,7 @@
                         <suiteXmlFile>${defaultSuite}</suiteXmlFile>
                     </suiteXmlFiles>
                     <systemPropertyVariables>
-                        <!-- подтягивает переменные окружения по имени в теге (stand, user) -->
+                        <!-- подтягивает переменные окружения по имени в теге (isRemote, browser) -->
                         <isRemote>${remote}</isRemote>
                         <browser>${browser}</browser>
                     </systemPropertyVariables>
@@ -221,15 +220,16 @@
             </properties>
         </profile>
         <profile>
+            <!-- Флаг для запуска браузера, выбрать только один -->
             <id>[!] Run Chrome</id>
             <properties>
                 <browser>chrome</browser>
             </properties>
         </profile>
         <profile>
-            <id>[!] Run Edge</id>
+            <id>[!] Run Firefox</id>
             <properties>
-                <browser>edge</browser>
+                <browser>firefox</browser>
             </properties>
         </profile>
     </profiles>
